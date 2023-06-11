@@ -52,7 +52,7 @@ export const CartContextProvider = ({ children }) => {
     if (exist.length) {
       increaseItemQuantity(item);
     } else {
-      setCart((prev) => [...prev, { ...item, qty: 1 }]);
+      setCart((prev) => [...prev, { ...item, qty: 1, price: item.price }]);
     }
   };
 
