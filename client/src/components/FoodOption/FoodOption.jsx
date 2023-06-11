@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { CartContext } from "../../context/CartContext";
 
-export const FoodOption = ({ option, index }) => {
+export const FoodOption = ({ option, index, displayMessageHandler }) => {
   const { name, image, price } = option;
   const [loaded, isLoaded] = useState(false);
+  const { addItem } = useContext(CartContext);
 
   return (
     <motion.div
@@ -28,7 +30,13 @@ export const FoodOption = ({ option, index }) => {
 
       <p className=" text-sm font-semibold">{name}</p>
       <p className=" text-sm font-semibold">${price}</p>
-      <button className=" border w-full p-1 text-white bg-[#FF3B3B] rounded-md">
+      <button
+        className=" border w-full p-1 text-white bg-[#FF3B3B] rounded-md hover:shadow-md"
+        onClick={() => {
+          addItem(option);
+          displayMessageHandler();
+        }}
+      >
         Add To Cart
       </button>
     </motion.div>

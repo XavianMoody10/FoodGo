@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cartoon from "../assets/cartoon.png";
 import Logo from "../assets/logo.png";
 import { motion } from "framer-motion";
-import { RiShoppingCart2Fill as CartIcon } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { burgers } from "../data/burgers.data";
 import { pizza } from "../data/pizza.data";
 import { FoodOption } from "../components/FoodOption/FoodOption";
 import { desert } from "../data/desert.data";
 import { fruits } from "../data/fruit.data";
+import { CartIcon } from "../components/CartIcon/CartIcon";
+import { CartMessage } from "../components/CartMessage/CartMessage";
+import { CartMessages } from "../features/CartMessages/CartMessages";
 
 export const Home = () => {
   const [active, setActive] = useState(0);
   const menuTabs = ["All", "Burger", "Pizza", "Desert", "Fruit"];
   const allFood = [...burgers, ...pizza, ...desert, ...fruits];
+  const [clickMessages, setClickMessages] = useState([]);
+
+  // Handler for displaying messages when user clicks a food option
+  const displayMessage = () => {
+    setClickMessages((prev) => [...prev, "click"]);
+  };
+
+  // clear setClickMessages state after 5 seconds
+  useEffect(() => {
+    const clearClickMessages = setTimeout(() => {
+      setClickMessages([]);
+    }, 5000);
+
+    return () => clearTimeout(clearClickMessages);
+  }, [clickMessages]);
+
+  // Display CartMessages
+  const messageMap = clickMessages.map((index) => {
+    return <CartMessage key={index} clickMessages={clickMessages} />;
+  });
 
   // Display options tabs
   const menuTabOptions = menuTabs.map((option, index) => (
@@ -30,35 +52,62 @@ export const Home = () => {
 
   // Display food options
   const allFoodOptions = allFood.map((option, index) => (
-    <FoodOption key={option.id} option={option} index={index}></FoodOption>
+    <FoodOption
+      key={option.id}
+      option={option}
+      index={index}
+      displayMessageHandler={displayMessage}
+    />
   ));
 
   const burgersOptionsOnly = burgers.map((option, index) => (
-    <FoodOption key={option.id} option={option} index={index}></FoodOption>
+    <FoodOption
+      key={option.id}
+      option={option}
+      index={index}
+      displayMessageHandler={displayMessage}
+    />
   ));
 
   const pizzaOptionsOnly = pizza.map((option, index) => (
-    <FoodOption key={option.id} option={option} index={index}></FoodOption>
+    <FoodOption
+      key={option.id}
+      option={option}
+      index={index}
+      displayMessageHandler={displayMessage}
+    />
   ));
 
   const desertOptionsOnly = desert.map((option, index) => (
-    <FoodOption key={option.id} option={option} index={index}></FoodOption>
+    <FoodOption
+      key={option.id}
+      option={option}
+      index={index}
+      displayMessageHandler={displayMessage}
+    />
   ));
 
   const fruitsOptionsOnly = fruits.map((option, index) => (
-    <FoodOption key={option.id} option={option} index={index}></FoodOption>
+    <FoodOption
+      key={option.id}
+      option={option}
+      index={index}
+      displayMessageHandler={displayMessage}
+    />
   ));
 
   return (
     <div className=" flex flex-col">
       <div className=" border-3 flex justify-center items-center min-h-screen gap-40">
+        <CartMessages>{messageMap}</CartMessages>
+
         <motion.div
           animate={{ opacity: [0, 1] }}
           transition={{ duration: 2 }}
           className=" flex flex-col items-center gap-10"
         >
           <img src={Logo} alt="logo" className=" w-[350px]" />
-          <button className="bg-[#FF3B3B] px-5 py-1 text-white rounded-md">
+          <button className="bg-[#FF3B3B] px-5 py-1 text-white rounded-md hover:shadow-md">
             Place Order
           </button>
         </motion.div>
@@ -90,10 +139,7 @@ export const Home = () => {
           <ul className=" flex gap-9 font-semibold">{menuTabOptions}</ul>
 
           <Link to={"cart"}>
-            <div className=" relative">
-              <span className=" absolute bottom-4 left-6">0</span>
-              <CartIcon className=" text-2xl"></CartIcon>
-            </div>
+            <CartIcon />
           </Link>
         </div>
 
