@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { CartItem } from "../components/CartItem/CartItem";
 import { CartContext } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TfiFaceSad as SadFaceIcon } from "react-icons/tfi";
 import { AiFillHome as HomeIcon } from "react-icons/ai";
 import { getCartFullPrice } from "../hooks/GetCartFullPrice";
 
 export const Cart = () => {
   const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   // Display cart items
   const cartItems = cart.map((item) => <CartItem key={item.id} item={item} />);
@@ -35,7 +36,10 @@ export const Cart = () => {
               <strong>{cart.length}</strong> Item(s)
             </p>
           </div>
-          <button className=" w-full bg-[#FF3B3B] hover:bg-red-500 text-white font-semibold p-3 rounded-md text-lg">
+          <button
+            className=" w-full bg-[#FF3B3B] hover:bg-red-500 text-white font-semibold p-3 rounded-md text-lg"
+            onClick={() => navigate("/checkout")}
+          >
             Checkout
           </button>
         </div>
