@@ -39,21 +39,21 @@ export const CartItem = ({ item }) => {
 
       <div className=" flex flex-col w-fit gap-2">
         <button
-          className=" border px-9 py-2 rounded-md"
+          className=" border px-9 py-2 rounded-md hover:bg-black hover:text-white duration-200"
           onClick={() => increaseItemQuantity(allFood[index])}
         >
           Increase Quantity
         </button>
 
         <button
-          className=" border px-9 py-2 rounded-md"
+          className=" border px-9 py-2 rounded-md hover:bg-black hover:text-white duration-200"
           onClick={() => decreaseItemQuantity(allFood[index], item)}
         >
           Decrease Quantity
         </button>
 
         <button
-          className=" border px-9 py-2 rounded-md"
+          className=" border px-9 py-2 rounded-md hover:bg-black hover:text-white duration-200"
           onClick={() => removeItem(allFood[index])}
         >
           Remove

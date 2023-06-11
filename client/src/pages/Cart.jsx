@@ -1,19 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { CartItem } from "../components/CartItem/CartItem";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import { TfiFaceSad as SadFaceIcon } from "react-icons/tfi";
 import { AiFillHome as HomeIcon } from "react-icons/ai";
+import { getCartFullPrice } from "../hooks/GetCartFullPrice";
 
 export const Cart = () => {
   const { cart } = useContext(CartContext);
-  const tempNum = 2;
-
-  const fullPrice = [...cart].reduce((acc, cur) => cur.price + acc, 0);
-
-  useEffect(() => {
-    console.log(fullPrice);
-  });
 
   // Display cart items
   const cartItems = cart.map((item) => <CartItem key={item.id} item={item} />);
@@ -34,14 +28,14 @@ export const Cart = () => {
           <div className=" w-full text-lg flex justify-between mb-3">
             <p>
               Full Price:
-              <strong> ${parseFloat(fullPrice.toFixed(2))}</strong>
+              <strong> ${parseFloat(getCartFullPrice(cart).toFixed(2))}</strong>
             </p>
 
             <p>
-              <strong>{cart.length}</strong> items(s)
+              <strong>{cart.length}</strong> Item(s)
             </p>
           </div>
-          <button className=" w-full bg-red-500 text-white font-semibold p-3 rounded-md text-lg">
+          <button className=" w-full bg-[#FF3B3B] hover:bg-red-500 text-white font-semibold p-3 rounded-md text-lg">
             Checkout
           </button>
         </div>
