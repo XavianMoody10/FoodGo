@@ -18,6 +18,7 @@ export const Home = () => {
   const menuTabs = ["All", "Burger", "Pizza", "Desert", "Fruit"];
   const allFood = [...burgers, ...pizza, ...desert, ...fruits];
   const [clickMessages, setClickMessages] = useState([]);
+  const [search, setSearch] = useState("");
   const menu = useRef();
 
   // Handler for displaying messages when user clicks a food option
@@ -53,50 +54,70 @@ export const Home = () => {
   ));
 
   // Display food options
-  const allFoodOptions = allFood.map((option, index) => (
-    <FoodOption
-      key={option.id}
-      option={option}
-      index={index}
-      displayMessageHandler={displayMessage}
-    />
-  ));
+  const allFoodOptions = allFood.map((option, index) => {
+    if (option.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+      return (
+        <FoodOption
+          key={option.id}
+          option={option}
+          index={index}
+          displayMessageHandler={displayMessage}
+        />
+      );
+    }
+  });
 
-  const burgersOptionsOnly = burgers.map((option, index) => (
-    <FoodOption
-      key={option.id}
-      option={option}
-      index={index}
-      displayMessageHandler={displayMessage}
-    />
-  ));
+  const burgersOptionsOnly = burgers.map((option, index) => {
+    if (option.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+      return (
+        <FoodOption
+          key={option.id}
+          option={option}
+          index={index}
+          displayMessageHandler={displayMessage}
+        />
+      );
+    }
+  });
 
-  const pizzaOptionsOnly = pizza.map((option, index) => (
-    <FoodOption
-      key={option.id}
-      option={option}
-      index={index}
-      displayMessageHandler={displayMessage}
-    />
-  ));
+  const pizzaOptionsOnly = pizza.map((option, index) => {
+    if (option.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+      return (
+        <FoodOption
+          key={option.id}
+          option={option}
+          index={index}
+          displayMessageHandler={displayMessage}
+        />
+      );
+    }
+  });
 
-  const desertOptionsOnly = desert.map((option, index) => (
-    <FoodOption
-      key={option.id}
-      option={option}
-      index={index}
-      displayMessageHandler={displayMessage}
-    />
-  ));
+  const desertOptionsOnly = desert.map((option, index) => {
+    if (option.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+      return (
+        <FoodOption
+          key={option.id}
+          option={option}
+          index={index}
+          displayMessageHandler={displayMessage}
+        />
+      );
+    }
+  });
 
-  const fruitsOptionsOnly = fruits.map((option, index) => (
-    <FoodOption
-      key={option.id}
-      option={option}
-      index={index}
-      displayMessageHandler={displayMessage}
-    />
-  ));
+  const fruitsOptionsOnly = fruits.map((option, index) => {
+    if (option.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+      return (
+        <FoodOption
+          key={option.id}
+          option={option}
+          index={index}
+          displayMessageHandler={displayMessage}
+        />
+      );
+    }
+  });
 
   return (
     <div className=" flex flex-col">
@@ -140,6 +161,7 @@ export const Home = () => {
           type="text"
           placeholder="Search Food"
           className=" border min-w-[480px] p-2 rounded-lg bg-white outline-none"
+          onChange={(e) => setSearch(e.target.value)}
         />
 
         <div className=" flex items-center gap-10 mt-6">
