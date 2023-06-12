@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Cartoon from "../assets/cartoon.png";
 import Logo from "../assets/logo.png";
 import { motion } from "framer-motion";
@@ -18,6 +18,7 @@ export const Home = () => {
   const menuTabs = ["All", "Burger", "Pizza", "Desert", "Fruit"];
   const allFood = [...burgers, ...pizza, ...desert, ...fruits];
   const [clickMessages, setClickMessages] = useState([]);
+  const menu = useRef();
 
   // Handler for displaying messages when user clicks a food option
   const displayMessage = () => {
@@ -108,14 +109,19 @@ export const Home = () => {
           className=" flex flex-col items-center gap-10"
         >
           <img src={Logo} alt="logo" className=" w-[350px]" />
-          <button className="bg-[#FF3B3B] px-5 py-1 text-white rounded-md hover:shadow-md">
+          <button
+            className="bg-[#FF3B3B] px-5 py-1 text-white rounded-md hover:shadow-md"
+            onClick={() => {
+              menu.current.scrollIntoView();
+            }}
+          >
             Place Order
           </button>
         </motion.div>
 
         <motion.img
-          initial={{ y: -2 }}
-          animate={[{ y: [-2, 2, -2, 2, -2, 2] }]}
+          initial={{ y: 2 }}
+          animate={{ y: [-2, 2, -2, 2, -2, 2] }}
           transition={{
             stiffness: 10,
             repeat: Infinity,
@@ -129,7 +135,7 @@ export const Home = () => {
         />
       </div>
 
-      <div className=" min-h-screen flex flex-col items-center">
+      <div className=" min-h-screen flex flex-col items-center" ref={menu}>
         <input
           type="text"
           placeholder="Search Food"
