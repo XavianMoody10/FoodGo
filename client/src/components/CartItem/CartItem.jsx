@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 import { burgers } from "../../data/burgers.data";
 import { pizza } from "../../data/pizza.data";
 import { desert } from "../../data/desert.data";
 import { fruits } from "../../data/fruit.data";
+import numbro from "numbro";
 
 export const CartItem = ({ item }) => {
   const { id, name, image, price, qty } = item;
@@ -28,7 +29,12 @@ export const CartItem = ({ item }) => {
           </li>
           <li>
             <span>Price: </span>
-            <strong>${parseFloat(price.toFixed(2))}</strong>
+            <strong>
+              {numbro(price).formatCurrency({
+                thousandSeparated: true,
+                mantissa: 2,
+              })}
+            </strong>
           </li>
           <li>
             <span>Quantity: </span>
@@ -40,21 +46,21 @@ export const CartItem = ({ item }) => {
       <div className=" flex flex-col w-fit gap-2">
         <button
           className=" border px-9 py-2 rounded-md hover:bg-black hover:text-white duration-200"
-          onClick={() => increaseItemQuantity(allFood[index])}
+          onClick={() => increaseItemQuantity(item)}
         >
           Increase Quantity
         </button>
 
         <button
           className=" border px-9 py-2 rounded-md hover:bg-black hover:text-white duration-200"
-          onClick={() => decreaseItemQuantity(allFood[index], item)}
+          onClick={() => decreaseItemQuantity(item)}
         >
           Decrease Quantity
         </button>
 
         <button
           className=" border px-9 py-2 rounded-md hover:bg-black hover:text-white duration-200"
-          onClick={() => removeItem(allFood[index])}
+          onClick={() => removeItem(allFood[index], item)}
         >
           Remove
         </button>

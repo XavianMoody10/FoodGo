@@ -4,7 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { CartContext } from "../../context/CartContext";
 
 export const FoodOption = ({ option, index, displayMessageHandler }) => {
-  const { name, image, price } = option;
+  const { id, name, image, price } = option;
   const [loaded, isLoaded] = useState(false);
   const { addItem } = useContext(CartContext);
 
@@ -34,7 +34,7 @@ export const FoodOption = ({ option, index, displayMessageHandler }) => {
         className=" border w-full p-1 text-white bg-[#FF3B3B] rounded-md hover:shadow-md"
         onClick={() => {
           addItem(option);
-          displayMessageHandler();
+          displayMessageHandler(option);
         }}
       >
         Add To Cart

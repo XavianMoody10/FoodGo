@@ -11,6 +11,7 @@ import { fruits } from "../data/fruit.data";
 import { CartIcon } from "../components/CartIcon/CartIcon";
 import { CartMessage } from "../components/CartMessage/CartMessage";
 import { CartMessages } from "../features/CartMessages/CartMessages";
+import { v4 as uuidv4 } from "uuid";
 
 export const Home = () => {
   const [active, setActive] = useState(0);
@@ -20,7 +21,7 @@ export const Home = () => {
 
   // Handler for displaying messages when user clicks a food option
   const displayMessage = () => {
-    setClickMessages((prev) => [...prev, "click"]);
+    setClickMessages((prev) => [...prev, uuidv4()]);
   };
 
   // clear setClickMessages state after 5 seconds

@@ -1,5 +1,5 @@
 // MyContext.js
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 // Create a new context
 export const CartContext = createContext();
@@ -9,35 +9,28 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const increaseItemQuantity = (option) => {
-    const itemIndex = cart.findIndex((item) => item.id === option.id);
-    const updatedCart = cart.map(
-      (item, index) =>
-        index === itemIndex && {
-          ...item,
-          price: item.price + option.price,
-          qty: item.qty + 1,
-        }
-    );
+    const deepClone = JSON.parse(JSON.stringify(cart));
+    const itemIndex = deepClone.findIndex((item) => item.id === option.id);
+    const singlePrice = deepClone[itemIndex].price / deepClone[itemIndex].qty;
 
-    setCart(updatedCart);
+    deepClone[itemIndex].qty = deepClone[itemIndex].qty + 1;
+    deepClone[itemIndex].price = deepClone[itemIndex].price + singlePrice;
+
+    setCart(deepClone);
   };
 
-  const decreaseItemQuantity = (option, cartItem) => {
-    const itemIndex = cart.findIndex((item) => item.id === option.id);
+  const decreaseItemQuantity = (option) => {
+    const deepClone = JSON.parse(JSON.stringify(cart));
+    const itemIndex = deepClone.findIndex((item) => item.id === option.id);
+    const singlePrice = deepClone[itemIndex].price / deepClone[itemIndex].qty;
 
-    if (cartItem.qty === 1) {
-      removeItem(cartItem);
+    deepClone[itemIndex].qty = deepClone[itemIndex].qty - 1;
+    deepClone[itemIndex].price = deepClone[itemIndex].price - singlePrice;
+
+    if (deepClone[itemIndex].qty < 1) {
+      removeItem(option);
     } else {
-      const updatedCart = cart.map(
-        (item, index) =>
-          index === itemIndex && {
-            ...item,
-            price: item.price - option.price,
-            qty: item.qty - 1,
-          }
-      );
-
-      setCart(updatedCart);
+      setCart(deepClone);
     }
   };
 
@@ -47,12 +40,14 @@ export const CartContextProvider = ({ children }) => {
   };
 
   const addItem = (item) => {
-    const exist = cart.filter(({ id }) => id === item.id);
+    const deepClone = JSON.parse(JSON.stringify(cart));
+    const exist = deepClone.filter(({ id }) => id === item.id);
+    const newItem = { ...item, qty: 1 };
 
     if (exist.length) {
       increaseItemQuantity(item);
     } else {
-      setCart((prev) => [...prev, { ...item, qty: 1, price: item.price }]);
+      setCart([...deepClone, newItem]);
     }
   };
 

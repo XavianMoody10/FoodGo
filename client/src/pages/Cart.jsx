@@ -24,12 +24,12 @@ export const Cart = () => {
       </div>
 
       {cart.length ? (
-        <div className=" w-3/5">
+        <div className=" w-3/5 mb-10">
           <div className=" flex flex-col gap-5 w-full mb-10">{cartItems}</div>
           <div className=" w-full text-lg flex justify-between mb-3">
             <p>
               Full Price:
-              <strong> ${parseFloat(getCartFullPrice(cart).toFixed(2))}</strong>
+              <strong> ${parseFloat(getCartFullPrice().toFixed(2))}</strong>
             </p>
 
             <p>
