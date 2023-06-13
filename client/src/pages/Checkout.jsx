@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const Checkout = () => {
   return (
     <div className=" flex items-center justify-center">
-      <div className=" flex gap-52 items-center">
+      <div className=" flex gap-52 items-center max-[996px]:grid max-[996px]:grid-cols-1 max-[996px]:gap-10">
         <div className=" flex flex-col items-center">
           <div className=" flex gap-2 w-full mb-3">
             <Link
@@ -23,10 +23,17 @@ export const Checkout = () => {
               Go To Cart
             </Link>
           </div>
-          <img src={logo} alt="logo" className=" max-w-[400px]"></img>
+          <img
+            src={logo}
+            alt="logo"
+            className=" max-w-[400px] max-[996px]:hidden"
+          ></img>
         </div>
 
-        <form action="POST" className=" flex flex-col gap-7 w-[300px]">
+        <form
+          action="POST"
+          className=" flex flex-col gap-7 w-[300px] max-[375px]:w-full"
+        >
           <FormLabelInput name={"name"} inputType={"text"} />
           <FormLabelInput name={"Address"} inputType={"text"} />
           <FormLabelInput name={"Credit Card Number"} inputType={"text"} />
@@ -60,8 +67,8 @@ export const Checkout = () => {
             </div>
           </div>
 
-          <div className=" flex justify-between items-center">
-            <p className=" flex flex-col">
+          <div className=" flex justify-between items-center max-[375px]:flex-col">
+            <p className=" flex flex-col max-[375px]:flex-row max-[375px]:gap-1 max-[375px]:mb-3">
               Total Bill
               <strong>${getCartFullPrice()}</strong>
             </p>
