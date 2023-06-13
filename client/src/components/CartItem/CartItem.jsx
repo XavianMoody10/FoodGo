@@ -14,7 +14,10 @@ export const CartItem = ({ item }) => {
   const index = allFood.findIndex((item) => (item.id = id));
 
   return (
-    <div className=" bg-white flex justify-between p-3 rounded-2xl">
+    <div
+      className=" bg-white flex justify-between p-3 rounded-2xl"
+      role="cart-item"
+    >
       <div className=" flex gap-10">
         <img
           src={image}
@@ -38,7 +41,7 @@ export const CartItem = ({ item }) => {
           </li>
           <li>
             <span>Quantity: </span>
-            <strong>{qty}</strong>
+            <strong role="qty-number">{qty}</strong>
           </li>
         </ul>
       </div>

@@ -14,6 +14,7 @@ export const CartMessage = ({ clickMessages }) => {
       initial={{ right: "-100%" }}
       animate={{ right: cartMessage ? "3%" : "-100%" }}
       className=" border py-4 px-5 bg-green-600 text-white flex gap-5 rounded-xl relative right-[-100%]"
+      role="cart-message"
     >
       <CartIcon />
       <span>Added To Cart</span>

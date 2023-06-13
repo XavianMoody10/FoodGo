@@ -159,6 +159,7 @@ export const Home = () => {
       <div className=" min-h-screen flex flex-col items-center" ref={menu}>
         <input
           type="text"
+          role="search-bar"
           placeholder="Search Food"
           className=" border min-w-[480px] p-2 rounded-lg bg-white outline-none"
           onChange={(e) => setSearch(e.target.value)}
@@ -167,7 +168,7 @@ export const Home = () => {
         <div className=" flex items-center gap-10 mt-6">
           <ul className=" flex gap-9 font-semibold">{menuTabOptions}</ul>
 
-          <Link to={"cart"}>
+          <Link to={"cart"} role="cart-icon">
             <CartIcon />
           </Link>
         </div>
