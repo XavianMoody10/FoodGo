@@ -15,7 +15,7 @@ export const Cart = () => {
 
   return (
     <div className=" flex flex-col items-center mt-14 mb-auto">
-      <div className=" flex w-3/5 relative mb-8">
+      <div className=" flex w-3/5 relative mb-8 max-[1258px]:w-2/4">
         <Link to={"/"} className=" absolute">
           <HomeIcon className=" text-3xl" />
         </Link>
@@ -24,9 +24,11 @@ export const Cart = () => {
       </div>
 
       {cart.length ? (
-        <div className=" w-3/5 mb-10">
-          <div className=" flex flex-col gap-5 w-full mb-10">{cartItems}</div>
-          <div className=" w-full text-lg flex justify-between mb-3">
+        <div className=" w-3/5 mb-10 max-[546px]:w-4/5">
+          <div className=" flex flex-col gap-5 w-full mb-10 max-[1258px]:w-fit max-[1258px]:grid max-[1258px]:grid-cols-2 max-[1258px]:m-auto max-[1094px]:grid-cols-1 max-[368px]:flex max-[368px]:flex-col">
+            {cartItems}
+          </div>
+          <div className=" w-full text-lg flex justify-between mb-3 max-[546px]:flex-col max-[546px]:items-center max-[546px]:my-10">
             <p>
               Full Price:
               <strong> ${parseFloat(getCartFullPrice().toFixed(2))}</strong>

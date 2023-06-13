@@ -15,17 +15,17 @@ export const CartItem = ({ item }) => {
 
   return (
     <div
-      className=" bg-white flex justify-between p-3 rounded-2xl"
+      className=" bg-white flex justify-between p-3 rounded-2xl max-[1258px]:flex-col max-[1258px]:w-[300px] max-[1258px]:items-center max-[1258px]:gap-10 max-[368px]:w-fit"
       role="cart-item"
     >
-      <div className=" flex gap-10">
+      <div className=" flex gap-10 max-[1258px]:flex-col max-[1258px]:items-center">
         <img
           src={image}
           alt=""
           className=" h-36 w-56 object-cover rounded-lg"
         />
 
-        <ul className=" flex flex-col gap-4 text-sm">
+        <ul className=" flex flex-col gap-4 text-sm max-[1258px]:items-center">
           <li>
             <span>Product: </span>
             <strong>{name}</strong>
