@@ -129,9 +129,13 @@ export const Home = () => {
           transition={{ duration: 2 }}
           className=" flex flex-col items-center gap-10"
         >
-          <img src={Logo} alt="logo" className=" w-[350px]" />
+          <img
+            src={Logo}
+            alt="logo"
+            className=" w-[350px] max-[1111px]:w-[550px] max-[634px]:w-[400px] max-[464px]:w-[300px] max-[341px]:w-[200px]"
+          />
           <button
-            className="bg-[#FF3B3B] px-5 py-1 text-white rounded-md hover:shadow-md"
+            className="bg-[#FF3B3B] px-5 py-1 text-white rounded-md hover:shadow-md max-[1111px]:w-60 max-[1111px]:py-3 max-[1111px]:text-2xl max-[341px]:text-xl max-[341px]:w-44"
             onClick={() => {
               menu.current.scrollIntoView();
             }}
@@ -152,7 +156,7 @@ export const Home = () => {
           }}
           src={Cartoon}
           alt="cartoon"
-          className=" w-[450px]"
+          className=" w-[450px] max-[1111px]:hidden"
         />
       </div>
 
@@ -161,19 +165,21 @@ export const Home = () => {
           type="text"
           role="search-bar"
           placeholder="Search Food"
-          className=" border min-w-[480px] p-2 rounded-lg bg-white outline-none"
+          className=" border min-w-[480px] p-2 rounded-lg bg-white outline-none max-[589px]:min-w-[300px] max-[338px]:min-w-[200px]"
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <div className=" flex items-center gap-10 mt-6">
-          <ul className=" flex gap-9 font-semibold">{menuTabOptions}</ul>
+        <div className=" flex items-center gap-10 mt-6 max-[589px]:flex-col">
+          <ul className=" flex gap-9 font-semibold max-[448px]:flex-col max-[589px]:items-center">
+            {menuTabOptions}
+          </ul>
 
           <Link to={"cart"} role="cart-icon">
             <CartIcon />
           </Link>
         </div>
 
-        <div className="grid grid-cols-4 gap-7 my-20">
+        <div className="grid grid-cols-4 gap-7 my-20 max-[1183px]:grid-cols-3  max-[882px]:grid-cols-2 max-[589px]:grid-cols-1">
           {active === 0 && allFoodOptions}
           {active === 1 && burgersOptionsOnly}
           {active === 2 && pizzaOptionsOnly}
