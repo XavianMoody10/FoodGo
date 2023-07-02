@@ -6,7 +6,8 @@ export const CartContext = createContext();
 
 // Create a provider component
 export const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const localCart = localStorage.getItem("cart");
+  const [cart, setCart] = useState(JSON.parse(localCart) || []);
 
   const increaseItemQuantity = (option) => {
     const deepClone = JSON.parse(JSON.stringify(cart));
@@ -16,6 +17,7 @@ export const CartContextProvider = ({ children }) => {
     deepClone[itemIndex].qty = deepClone[itemIndex].qty + 1;
     deepClone[itemIndex].price = deepClone[itemIndex].price + singlePrice;
 
+    localStorage.setItem("cart", JSON.stringify(deepClone));
     setCart(deepClone);
   };
 
@@ -30,12 +32,14 @@ export const CartContextProvider = ({ children }) => {
     if (deepClone[itemIndex].qty < 1) {
       removeItem(option);
     } else {
+      localStorage.setItem("cart", JSON.stringify(deepClone));
       setCart(deepClone);
     }
   };
 
   const removeItem = (option) => {
     const updatedCart = cart.filter((item) => item.id !== option.id);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCart(updatedCart);
   };
 
@@ -47,6 +51,7 @@ export const CartContextProvider = ({ children }) => {
     if (exist.length) {
       increaseItemQuantity(item);
     } else {
+      localStorage.setItem("cart", JSON.stringify([...deepClone, newItem]));
       setCart([...deepClone, newItem]);
     }
   };
@@ -55,7 +60,7 @@ export const CartContextProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
-        cart: cart,
+        cart,
         decreaseItemQuantity,
         increaseItemQuantity,
         removeItem,

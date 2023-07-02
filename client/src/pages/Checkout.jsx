@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../assets/logo.png";
 import { FormLabelInput } from "../components/FormLabelInput/FormLabelInput";
 import { getCartFullPrice } from "../hooks/GetCartFullPrice";
@@ -70,7 +70,7 @@ export const Checkout = () => {
           <div className=" flex justify-between items-center max-[375px]:flex-col">
             <p className=" flex flex-col max-[375px]:flex-row max-[375px]:gap-1 max-[375px]:mb-3">
               Total Bill
-              <strong>${getCartFullPrice()}</strong>
+              <strong>${parseFloat(getCartFullPrice().toFixed(2))}</strong>
             </p>
 
             <button
