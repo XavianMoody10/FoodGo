@@ -1,2 +1,2 @@
 # FoodGo
-Food Delivering App
+Food Ordering App
